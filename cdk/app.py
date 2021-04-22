@@ -89,17 +89,17 @@ class FrontendService(core.Stack):
         )
         
         # Enable Service Autoscaling
-        #self.autoscale = self.fargate_load_balanced_service.service.auto_scale_task_count(
-        #    min_capacity=1,
-        #    max_capacity=10
-        #)
+        self.autoscale = self.fargate_load_balanced_service.service.auto_scale_task_count(
+            min_capacity=1,
+            max_capacity=10
+        )
         
-        #self.autoscale.scale_on_cpu_utilization(
-        #    "CPUAutoscaling",
-        #    target_utilization_percent=50,
-        #    scale_in_cooldown=core.Duration.seconds(30),
-        #    scale_out_cooldown=core.Duration.seconds(30)
-        #)
+        self.autoscale.scale_on_cpu_utilization(
+            "CPUAutoscaling",
+            target_utilization_percent=50,
+            scale_in_cooldown=core.Duration.seconds(30),
+            scale_out_cooldown=core.Duration.seconds(30)
+        )
 
 
 _env = core.Environment(account=getenv('AWS_ACCOUNT_ID'), region=getenv('AWS_DEFAULT_REGION'))
